@@ -27,7 +27,6 @@
       }
     ]
   },
-  "scripts": ["scripts/butler.js"],
   "packFolders": [
     {
       "name": "Baibusu Butler",

@@ -1,8 +1,3 @@
-2025/12/17-21:32:41.890 b1ac Recovering log #201
-2025/12/17-21:32:41.955 b1ac Delete type=0 #201
-2025/12/17-21:32:41.955 b1ac Delete type=3 #199
-2025/12/17-21:39:05.847 1d64 Level-0 table #207: started
-2025/12/17-21:39:05.847 1d64 Level-0 table #207: 0 bytes OK
-2025/12/17-21:39:05.924 1d64 Delete type=0 #205
-2025/12/17-21:39:06.057 1d64 Manual compaction at level-0 from '!macros!z6zkSpzg0UIcxLPF' @ 72057594037927935 : 1 .. '!macros!z6zkSpzg0UIcxLPF' @ 0 : 0; will stop at (end)
-2025/12/17-21:39:06.058 1d64 Manual compaction at level-1 from '!macros!z6zkSpzg0UIcxLPF' @ 72057594037927935 : 1 .. '!macros!z6zkSpzg0UIcxLPF' @ 0 : 0; will stop at (end)
+2025/12/17-22:17:42.309 4da4 Recovering log #206
+2025/12/17-22:17:42.378 4da4 Delete type=0 #206
+2025/12/17-22:17:42.379 4da4 Delete type=3 #204

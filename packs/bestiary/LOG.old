@@ -1,7 +1,7 @@
-2025/12/17-12:38:01.787 31a0 Recovering log #390
-2025/12/17-12:38:01.874 31a0 Delete type=0 #390
-2025/12/17-12:38:01.874 31a0 Delete type=3 #388
-2025/12/17-19:59:12.679 2ff8 Level-0 table #396: started
-2025/12/17-19:59:12.679 2ff8 Level-0 table #396: 0 bytes OK
-2025/12/17-19:59:12.734 2ff8 Delete type=0 #394
-2025/12/17-19:59:12.891 2ff8 Manual compaction at level-0 from '!actors!6GKLj8OTwLCe9Vqj' @ 72057594037927935 : 1 .. '!actors.items!vSbgQgPTKFeJOgym.wPoobMAF8dEMbXzS' @ 0 : 0; will stop at (end)
+2025/12/17-21:32:41.428 b1ac Recovering log #395
+2025/12/17-21:32:41.500 b1ac Delete type=0 #395
+2025/12/17-21:32:41.500 b1ac Delete type=3 #393
+2025/12/17-21:39:05.501 1d64 Level-0 table #400: started
+2025/12/17-21:39:05.501 1d64 Level-0 table #400: 0 bytes OK
+2025/12/17-21:39:05.556 1d64 Delete type=0 #398
+2025/12/17-21:39:05.646 1d64 Manual compaction at level-0 from '!actors!6GKLj8OTwLCe9Vqj' @ 72057594037927935 : 1 .. '!actors.items!vSbgQgPTKFeJOgym.wPoobMAF8dEMbXzS' @ 0 : 0; will stop at (end)
