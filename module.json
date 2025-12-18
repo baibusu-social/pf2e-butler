@@ -129,6 +129,10 @@
       }
     }
   ],
+  "url": "https://github.com/baibusu-social/pf2e-butler",
+  "manifest": "https://github.com/baibusu-social/pf2e-butler/releases/latest/download/module.json",
+  "download": "https://github.com/baibusu-social/pf2e-butler/releases/download/v1.0.0/module.zip",
+  "readme": "https://github.com/baibusu-social/pf2e-butler/blob/main/README.md",
   "flags": {
     "allowBugReporter": true
   }
