@@ -1,0 +1,135 @@
+{
+  "id": "baibusu-pf2e-butler",
+  "title": "Baibusu - PF2e Butler",
+  "description": "A module of common tools used throughout Baibusu tabletop games.",
+  "version": "1.0.0",
+  "authors": [
+    {
+      "name": "VulgarBear",
+      "url": "https://github.com/VulgarBear",
+      "discord": "Vulgarbear"
+    },
+    {
+      "name": "Baibusu.social",
+      "url": "https://github.com/baibusu-social"
+    }
+  ],
+  "compatibility": {
+    "minimum": "13",
+    "verified": "13"
+  },
+  "relationships": {
+    "systems": [
+      {
+        "id": "pf2e",
+        "type": "system",
+        "compatibility": {}
+      }
+    ]
+  },
+  "scripts": ["scripts/butler.js"],
+  "packFolders": [
+    {
+      "name": "Baibusu Butler",
+      "sorting": "a",
+      "packs": [
+        "butler-bestiary",
+        "butler-deities,",
+        "butler-effects",
+        "butler-items",
+        "butler-journals",
+        "butler-macros",
+        "butler-tables"
+      ]
+    }
+  ],
+  "packs": [
+    {
+      "name": "butler-bestiary",
+      "label": "Bestiary",
+      "banner": "modules/baibusu-pf2e-butler/artwork/banners/banner.webp",
+      "path": "packs/bestiary",
+      "type": "Actor",
+      "system": "pf2e",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "butler-deities",
+      "label": "Deities",
+      "banner": "modules/baibusu-pf2e-butler/artwork/banners/banner.webp",
+      "path": "packs/deities",
+      "type": "Item",
+      "system": "pf2e",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "butler-effects",
+      "label": "Effects",
+      "banner": "modules/baibusu-pf2e-butler/artwork/banners/banner.webp",
+      "path": "packs/effects",
+      "type": "Item",
+      "system": "pf2e",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "butler-items",
+      "label": "Items",
+      "banner": "modules/baibusu-pf2e-butler/artwork/banners/banner.webp",
+      "path": "packs/items",
+      "type": "Item",
+      "system": "pf2e",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "butler-journals",
+      "label": "Journals",
+      "banner": "modules/baibusu-pf2e-butler/artwork/banners/banner.webp",
+      "path": "packs/journals",
+      "type": "JournalEntry",
+      "system": "pf2e",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "butler-macros",
+      "label": "Macros",
+      "banner": "modules/baibusu-pf2e-butler/artwork/banners/banner.webp",
+      "path": "packs/macros",
+      "type": "Macro",
+      "system": "pf2e",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "butler-tables",
+      "label": "Roll Tables",
+      "banner": "modules/baibusu-pf2e-butler/artwork/banners/banner.webp",
+      "path": "packs/tables",
+      "type": "RollTable",
+      "system": "pf2e",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    }
+  ],
+  "flags": {
+    "allowBugReporter": true
+  }
+}
