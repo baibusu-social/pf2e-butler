@@ -1,57 +1,79 @@
 version: 44
 jobs:
-- name: Release Creation
-  jobExecutor: docker-executor
-  steps:
-  - !CheckoutStep
-    name: Checkout Code
-    cloneCredential: !DefaultCredential {}
-    withLfs: false
-    withSubmodules: false
-    condition: ALWAYS
-  - !CommandStep
-    name: Substitute Manifest and Download Links
-    runInContainer: true
-    image: ubuntu:latest
-    interpreter: !DefaultInterpreter
-      commands: |
-        # Install required tools
-        apt-get update && apt-get install -y jq
-        
-        # Get the tag name from the ref
-        TAG_NAME="${REF##*/}"
-        
-        # Update module.json with versioned information
-        jq --arg version "$TAG_NAME" \
-           --arg url "https://git.vulgarity.xyz/pf2e-butler" \
-           --arg manifest "https://git.vulgarity.xyz/pf2e-butler/~files/release/module.json" \
-           --arg download "https://git.vulgarity.xyz/pf2e-butler/~files/release/module.zip" \
-           '.version = $version | .url = $url | .manifest = $manifest | .download = $download' \
-           module.json > module.json.tmp && mv module.json.tmp module.json
-        
-        cat module.json
-    useTTY: false
-    condition: ALWAYS
-  - !CommandStep
-    name: Create Module ZIP
-    runInContainer: true
-    image: ubuntu:latest
-    interpreter: !DefaultInterpreter
-      commands: |
-        apt-get update && apt-get install -y zip
-        zip -r ./module.zip module.json index.js index.js.map LICENSE styles/ templates/ languages/
-    useTTY: false
-    condition: ALWAYS
-  - !PublishArtifactStep
-    name: Publish Artifacts
-    artifacts: |
-      module.json
-      module.zip
-    condition: ALWAYS
-  triggers:
-  - !TagCreateTrigger
-    projects: this project
-  retryCondition: never
-  maxRetries: 3
-  retryDelay: 30
-  timeout: 3600
+  - name: Release Creation
+    jobExecutor: docker-executor
+    steps:
+      - !CheckoutStep
+        name: Checkout Code
+        cloneCredential: !DefaultCredential {}
+        withLfs: false
+        withSubmodules: false
+        condition: ALWAYS
+      - !CommandStep
+        name: Substitute Manifest and Download Links
+        runInContainer: true
+        image: ubuntu:latest
+        interpreter: !DefaultInterpreter
+          commands: |
+            # Install required tools
+            apt-get update && apt-get install -y jq
+
+            # Get the tag name - OneDev provides this in the REF variable
+            echo "Full REF: $REF"
+            TAG_NAME=$(echo "$REF" | sed 's/refs\/tags\///')
+            echo "Extracted TAG_NAME: $TAG_NAME"
+
+            # Update module.json with versioned information
+            jq --arg version "$TAG_NAME" \
+               --arg url "https://git.vulgarity.xyz/pf2e-butler" \
+               --arg manifest "https://git.vulgarity.xyz/pf2e-butler/~files/release/module.json" \
+               --arg download "https://git.vulgarity.xyz/pf2e-butler/~files/release/module.zip" \
+               '.version = $version | .url = $url | .manifest = $manifest | .download = $download' \
+               module.json > module.json.tmp && mv module.json.tmp module.json
+
+            echo "Updated module.json:"
+            cat module.json
+        useTTY: false
+        condition: ALWAYS
+      - !CommandStep
+        name: Create Module ZIP
+        runInContainer: true
+        image: ubuntu:latest
+        interpreter: !DefaultInterpreter
+          commands: |
+            apt-get update && apt-get install -y zip
+
+            # List files to see what's available
+            echo "Files in repository:"
+            ls -la
+
+            # Create zip with only files that exist
+            # Add module.json and LICENSE (these definitely exist based on the log)
+            zip -r ./module.zip module.json LICENSE
+
+            # Add optional files/directories if they exist
+            [ -f index.js ] && zip -u ./module.zip index.js
+            [ -f index.js.map ] && zip -u ./module.zip index.js.map
+            [ -d styles ] && zip -ur ./module.zip styles/
+            [ -d templates ] && zip -ur ./module.zip templates/
+            [ -d languages ] && zip -ur ./module.zip languages/
+            [ -d packs ] && zip -ur ./module.zip packs/
+            [ -d artwork ] && zip -ur ./module.zip artwork/
+
+            echo "ZIP contents:"
+            unzip -l ./module.zip
+        useTTY: false
+        condition: ALWAYS
+      - !PublishArtifactStep
+        name: Publish Artifacts
+        artifacts: |
+          module.json
+          module.zip
+        condition: ALWAYS
+    triggers:
+      - !TagCreateTrigger
+        projects: this project
+    retryCondition: never
+    maxRetries: 3
+    retryDelay: 30
+    timeout: 3600
