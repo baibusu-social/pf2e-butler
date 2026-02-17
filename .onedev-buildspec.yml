@@ -1,57 +1,57 @@
 version: 44
 jobs:
-  - name: Release Creation
-    jobExecutor: docker-executor
-    steps:
-      - !CheckoutStep
-        name: Checkout Code
-        cloneCredential: !DefaultCredential {}
-        withLfs: false
-        withSubmodules: false
-        condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
-      - !CommandStep
-        name: Substitute Manifest and Download Links
-        runInContainer: true
-        image: ubuntu:latest
-        interpreter: !DefaultInterpreter
-          commands: |
-            # Install required tools
-            apt-get update && apt-get install -y jq
-
-            # Get the tag name from the ref
-            TAG_NAME="${REF##*/}"
-
-            # Update module.json with versioned information
-            jq --arg version "$TAG_NAME" \
-               --arg url "https://git.vulgarity.xyz/pf2e-butler" \
-               --arg manifest "https://git.vulgarity.xyz/pf2e-butler/~files/release/module.json" \
-               --arg download "https://git.vulgarity.xyz/pf2e-butler/~files/release/module.zip" \
-               '.version = $version | .url = $url | .manifest = $manifest | .download = $download' \
-               module.json > module.json.tmp && mv module.json.tmp module.json
-
-            cat module.json
-        useTTY: false
-        condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
-      - !CommandStep
-        name: Create Module ZIP
-        runInContainer: true
-        image: ubuntu:latest
-        interpreter: !DefaultInterpreter
-          commands: |
-            apt-get update && apt-get install -y zip
-            zip -r ./module.zip module.json index.js index.js.map LICENSE styles/ templates/ languages/
-        useTTY: false
-        condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
-      - !PublishArtifactStep
-        name: Publish Artifacts
-        artifacts: |
-          module.json
-          module.zip
-        condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
-    triggers:
-      - !TagCreateTrigger
-        projects: this project
-    retryCondition: never
-    maxRetries: 3
-    retryDelay: 30
-    timeout: 3600
+- name: Release Creation
+  jobExecutor: docker-executor
+  steps:
+  - !CheckoutStep
+    name: Checkout Code
+    cloneCredential: !DefaultCredential {}
+    withLfs: false
+    withSubmodules: false
+    condition: ALWAYS
+  - !CommandStep
+    name: Substitute Manifest and Download Links
+    runInContainer: true
+    image: ubuntu:latest
+    interpreter: !DefaultInterpreter
+      commands: |
+        # Install required tools
+        apt-get update && apt-get install -y jq
+        
+        # Get the tag name from the ref
+        TAG_NAME="${REF##*/}"
+        
+        # Update module.json with versioned information
+        jq --arg version "$TAG_NAME" \
+           --arg url "https://git.vulgarity.xyz/pf2e-butler" \
+           --arg manifest "https://git.vulgarity.xyz/pf2e-butler/~files/release/module.json" \
+           --arg download "https://git.vulgarity.xyz/pf2e-butler/~files/release/module.zip" \
+           '.version = $version | .url = $url | .manifest = $manifest | .download = $download' \
+           module.json > module.json.tmp && mv module.json.tmp module.json
+        
+        cat module.json
+    useTTY: false
+    condition: ALWAYS
+  - !CommandStep
+    name: Create Module ZIP
+    runInContainer: true
+    image: ubuntu:latest
+    interpreter: !DefaultInterpreter
+      commands: |
+        apt-get update && apt-get install -y zip
+        zip -r ./module.zip module.json index.js index.js.map LICENSE styles/ templates/ languages/
+    useTTY: false
+    condition: ALWAYS
+  - !PublishArtifactStep
+    name: Publish Artifacts
+    artifacts: |
+      module.json
+      module.zip
+    condition: ALWAYS
+  triggers:
+  - !TagCreateTrigger
+    projects: this project
+  retryCondition: never
+  maxRetries: 3
+  retryDelay: 30
+  timeout: 3600
