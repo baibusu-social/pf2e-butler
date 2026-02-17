@@ -8,7 +8,7 @@
 ![GitHub License](https://img.shields.io/github/license/baibusu-social/pf2e-butler?style=for-the-badge)
 ![GitHub Tag](https://img.shields.io/github/v/tag/baibusu-social/pf2e-butler?style=for-the-badge)
 
-![Foundry Version](https://img.shields.io/endpoint?url=https%3A%2F%2Ffoundryshields.com%2Fversion%3Fstyle%3Dfor-the-badge%26url%3Dhttps%3A%2F%2Fraw.githubusercontent.com%2Fbaibusu-social%2Fpf2e-butler%2Frefs%2Fheads%2Fmain%2Fmodule.json)
+![Foundry Version](https://img.shields.io/endpoint?url=https%3A%2F%2Ffoundryshields.com%2Fversion%3Fstyle%3Dfor-the-badge%26url%3Dhttps%3A%2F%2Fgithub.com%2Fbaibusu-social%2Fpf2e-butler%2Freleases%2Flatest%2Fdownload%2Fmodule.json)
 [![Made with GH Actions](https://img.shields.io/badge/CI-GitHub_Actions-blue?style=for-the-badge&logo=github-actions&logoColor=white)](https://github.com/features/actions 'Go to GitHub Actions homepage')
 [![Baibusu.Social](https://img.shields.io/badge/Baibusu.Social-a793b2?style=for-the-badge&logo=misskey&logoColor=white)](https://baibusu.social/ 'Go to Baibusu.Social')
 
